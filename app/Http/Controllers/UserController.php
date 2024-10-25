@@ -48,7 +48,7 @@ class UserController extends Controller
     {
         $kelasModel = new Kelas();
 
-        
+
         $kelas = $kelasModel->getKelas();
         $jurusan_id = Jurusan::all();
 
@@ -84,7 +84,7 @@ class UserController extends Controller
                 'nama' => $request->input('nama'),
                 'npm' => $request->input('npm'),
                 'kelas_id' => $request->input('kelas_id'),
-                'jurusan_id' =>$request->input('jurusan_id'),
+                'jurusan_id' => $request->input('jurusan_id'),
                 'foto' => $filename, // Menyimpan nama file ke database
             ]);
         } else {
