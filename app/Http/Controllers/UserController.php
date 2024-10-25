@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\UserModel;
+use App\Models\Jurusan;
 use App\Http\Requests\UserControllerRequest;
 
 class UserController extends Controller
@@ -12,11 +13,13 @@ class UserController extends Controller
 
     public $userModel;
     public $kelasModel;
+    public $jurusanModel;
 
     public function __construct()
     {
         $this->userModel = new UserModel();
         $this->kelasModel = new Kelas();
+        $this->jurusanModel = new Jurusan();
     }
 
     public function index()
@@ -45,12 +48,14 @@ class UserController extends Controller
     {
         $kelasModel = new Kelas();
 
-        // Mengambil data kelas menggunakan method getKelas
+        
         $kelas = $kelasModel->getKelas();
+        $jurusan_id = Jurusan::all();
 
         $data = [
             'title' => 'Create User',
             'kelas' => $kelas,
+            'jurusan' => $jurusan_id,
         ];
 
         return view('create_user', $data);
@@ -63,6 +68,7 @@ class UserController extends Controller
             'nama' => 'required',
             'npm' => 'required',
             'kelas_id' => 'required',
+            'jurusan_id' => 'required|exists:jurusan,id',
             'foto' => 'image|file|max:2048', // Validasi foto
         ]);
 
@@ -78,6 +84,7 @@ class UserController extends Controller
                 'nama' => $request->input('nama'),
                 'npm' => $request->input('npm'),
                 'kelas_id' => $request->input('kelas_id'),
+                'jurusan_id' =>$request->input('jurusan_id'),
                 'foto' => $filename, // Menyimpan nama file ke database
             ]);
         } else {
@@ -86,6 +93,7 @@ class UserController extends Controller
                 'nama' => $request->input('nama'),
                 'npm' => $request->input('npm'),
                 'kelas_id' => $request->input('kelas_id'),
+                'jurusan_id' => $request->input('jurusan_id'),
                 'foto' => null,
             ]);
         }
