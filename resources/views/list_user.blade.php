@@ -25,6 +25,7 @@
                         <th scope="col"><b>Nama</b></th>
                         <th scope="col"><b>NPM</b></th>
                         <th scope="col"><b>Kelas</b></th>
+                        <th scope="col"><b>Fakultas</b></th>
                         <th scope="col"><b>Aksi</b></th>
                     </tr>
                 </thead>
@@ -35,6 +36,7 @@
                             <td>{{ $user['nama'] }}</td>
                             <td>{{ $user['npm'] }}</td>
                             <td>{{ $user['nama_kelas'] }}</td>
+                            <td>{{ $user->nama_fakultas }}</td>
                             <td>
                                 <div class="action-buttons">
                                     <a href="{{ route('user.show', $user->id) }}" class="btn btn-info btn-sm">View</a>
